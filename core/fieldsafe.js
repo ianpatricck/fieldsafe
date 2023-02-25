@@ -4,18 +4,87 @@
  *
  */
 
-class Sanitization {
-  // ...
-}
-
-class Validation {
+class Regex {
 
   SPECIAL_CHARS_REGEX = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-  EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  CPF_REGEX = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
-  CNPJ_REGEX = /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/;
-  CEP_REGEX = /^\d{5}\-\d{3}$/;
+  EMAIL_REGEX         = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  CPF_REGEX           = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+  CNPJ_REGEX          = /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/;
+  CEP_REGEX           = /^\d{5}\-\d{3}$/;
 
+}
+
+class Sanitization extends Regex {
+ 
+  /**
+   * Add backslash when contains quote, backslash, apostrophe.
+   *
+   * |"|'|\|`|
+   *
+   * @param {string}
+   * @return {string}
+   *
+   */
+
+  add_slashes(text) {    
+    return text.split('').map(char => {
+      if (/'|"|\\|`|´$/.test(char))
+        char = '\\' + char;
+      return char;
+    }).join('');
+  }
+
+  /**
+   * Add backslash when contains special chars
+   *
+   * @param {string}
+   * @return {string}
+   *
+   */
+
+  escape_special_chars(string) {
+    return string.split('').map(char => {
+      if (this.SPECIAL_CHARS_REGEX.test(char))
+        char = '\\' + char;
+      return char;
+    }).join('');
+  } 
+  
+  /**
+   * Remove all numeric characters
+   *
+   * @param {string}
+   * @return {string}
+   *
+   */
+
+  remove_numeric(text) {
+    return text.split('').map(char => {
+      if (Number(char) || char == 0)
+        char = '';
+      return char;
+    }).join(''); 
+  }
+
+  /**
+   * Remove all special chars
+   *
+   * @param {sring}
+   * @return {string}
+   *
+   */
+
+  remove_special_chars(text) {
+    return text.split('').map(char => {
+      if (this.SPECIAL_CHARS_REGEX.test(char))
+        char = '';
+      return char;
+    }).join('');
+  } 
+}
+
+class Validation extends Regex {
+ 
   /**
    * Returns true if email format is valid
    *
