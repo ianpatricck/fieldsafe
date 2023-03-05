@@ -4,17 +4,35 @@
  *
  */
 
-class Regex {
+class Mask {
 
-  SPECIAL_CHARS_REGEX = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-  EMAIL_REGEX         = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  CPF_REGEX           = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
-  CNPJ_REGEX          = /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/;
-  CEP_REGEX           = /^\d{5}\-\d{3}$/;
+  constructor() {
+    this.formStatus = null;
+  }
 
+  add() {
+    return this;
+  }
+
+  validate(fn = null) {
+    if (fn) {
+      fn(this.formStatus)
+    } else {
+      // ...
+    }
+  }
 }
 
-class Sanitization extends Regex {
+const REGEX = {
+  SPECIAL_CHARS: /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/,
+  EMAIL:         /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+  CPF:           /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
+  CNPJ:          /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/,
+  CEP:           /^\d{5}\-\d{3}$/
+};
+
+
+class Sanitization {
  
   /**
    * Add backslash when contains quote, backslash, apostrophe.
@@ -44,7 +62,7 @@ class Sanitization extends Regex {
 
   escape_special_chars(string) {
     return string.split('').map(char => {
-      if (this.SPECIAL_CHARS_REGEX.test(char))
+      if (REGEX.SPECIAL_CHARS.test(char))
         char = '\\' + char;
       return char;
     }).join('');
@@ -76,14 +94,14 @@ class Sanitization extends Regex {
 
   remove_special_chars(text) {
     return text.split('').map(char => {
-      if (this.SPECIAL_CHARS_REGEX.test(char))
+      if (REGEX.SPECIAL_CHARS.test(char))
         char = '';
       return char;
     }).join('');
   } 
 }
 
-class Validation extends Regex {
+class Validation {
  
   /**
    * Returns true if email format is valid
@@ -94,7 +112,7 @@ class Validation extends Regex {
    */
 
   email(email) {
-    return email.match(this.EMAIL_REGEX) !== null ? true : false;
+    return email.match(REGEX.EMAIL) !== null ? true : false;
   }
 
   /**
@@ -147,7 +165,7 @@ class Validation extends Regex {
       }
 
       if (special_chars && special_chars === true) {
-        const regex = this.SPECIAL_CHARS_REGEX;
+        const regex = REGEX.SPECIAL_CHARS;
         if (!regex.test(pass))
           return {
             success: false,
@@ -161,7 +179,7 @@ class Validation extends Regex {
         if (typeof lowercase_quantity === 'boolean')
           throw new Error('lowercase_quantity must be a number');
 
-        const special_chars = this.SPECIAL_CHARS_REGEX;
+        const special_chars = REGEX.SPECIAL_CHARS;
         let occurrences = pass.split('').map(letter => { 
           return letter == letter.toLowerCase() && isNaN(letter) && !special_chars.test(letter) ? letter : ''
         }).join('');
@@ -179,7 +197,7 @@ class Validation extends Regex {
         if (typeof uppercase_quantity === 'boolean')
           throw new Error('uppercase_quantity must be a number');
 
-        const special_chars = this.SPECIAL_CHARS_REGEX;
+        const special_chars = REGEX.SPECIAL_CHARS;
         let occurrences = pass.split('').map(letter => { 
           return letter == letter.toUpperCase() && isNaN(letter) && !special_chars.test(letter) ? letter : '' 
         }).join('');
@@ -227,7 +245,7 @@ class Validation extends Regex {
    */
 
   cpf(cpf) {
-    return this.CPF_REGEX.test(cpf);
+    return REGEX.CPF.test(cpf);
   }
 
   /**
@@ -239,7 +257,7 @@ class Validation extends Regex {
    */
 
   cnpj(cnpj) {
-    return this.CNPJ_REGEX.test(cnpj);
+    return REGEX.CNPJ.test(cnpj);
   }
 
   /**
@@ -251,7 +269,7 @@ class Validation extends Regex {
    */
 
   cep(cep) {
-    return this.CEP_REGEX.test(cep);
+    return REGEX.CEP.test(cep);
   }
 
 }
