@@ -7,10 +7,19 @@
 class Mask {
 
   constructor() {
-    this.formStatus = null;
+    this.formStatus = [];
   }
 
-  add() {
+  fmatch(input, match, options) { 
+
+    input.addEventListener('keyup', (event) => {
+
+      if (input.value.trim() !== "") {
+        
+      }
+
+    });
+
     return this;
   }
 
@@ -18,7 +27,7 @@ class Mask {
     if (fn) {
       fn(this.formStatus)
     } else {
-      // ...
+      console.log(this.formStatus);
     }
   }
 }
@@ -33,7 +42,7 @@ const REGEX = {
 
 
 class Sanitization {
- 
+
   /**
    * Add backslash when contains quote, backslash, apostrophe.
    *
@@ -67,7 +76,7 @@ class Sanitization {
       return char;
     }).join('');
   } 
-  
+
   /**
    * Remove all numeric characters
    *
@@ -102,7 +111,7 @@ class Sanitization {
 }
 
 class Validation {
- 
+
   /**
    * Returns true if email format is valid
    *
@@ -125,7 +134,7 @@ class Validation {
    */
 
   password(pass, options) {
-   
+
     if (options && typeof options === 'object') {
 
       if (Object.keys(options).length === 0) { 
@@ -183,7 +192,7 @@ class Validation {
         let occurrences = pass.split('').map(letter => { 
           return letter == letter.toLowerCase() && isNaN(letter) && !special_chars.test(letter) ? letter : ''
         }).join('');
-        
+
         if (occurrences.length < lowercase_quantity)
           return {
             success: false,
@@ -193,7 +202,7 @@ class Validation {
       }
 
       if (uppercase_quantity && !isNaN(uppercase_quantity)) {
- 
+
         if (typeof uppercase_quantity === 'boolean')
           throw new Error('uppercase_quantity must be a number');
 
