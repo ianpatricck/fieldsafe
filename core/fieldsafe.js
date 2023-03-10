@@ -12,23 +12,71 @@ class Mask {
 
   fmatch(input, match, options) { 
 
-    input.addEventListener('keyup', (event) => {
+    if (!input)
+      throw new Error('input param is not defined');
 
-      if (input.value.trim() !== "") {
+    if (!match)
+      throw new Error('match param is not defined');
+
+    let { success, failure, response } = options;
+
+    if (!success || !failure || !response)
+      throw new Error('success, failure or response fields are undefined');
+
+    try {
+
+      input.addEventListener('keyup', (event) => {
         
-      }
+        if (input.value.trim() !== "") {
+          if (typeof match === 'string') {
+            if (REGEX[match].test(input.value)) {
 
-    });
+              let newStatus = {
+                name: input.name,
+                success: true,
+                message: failure
+              };
 
-    return this;
+              this.formStatus = this.formStatus.filter(status => status.name !== newStatus.name) 
+              this.formStatus.push(newStatus);
+
+              if (typeof response === 'string')
+                document.querySelector(response).innerText = success;
+
+            } else {
+
+              let newStatus = {
+                name: input.name,
+                success: false,
+                message: failure
+              };
+
+              this.formStatus = this.formStatus.filter(status => status.name !== newStatus.name) 
+              this.formStatus.push(newStatus);
+
+              if (typeof response === 'string')
+                document.querySelector(response).innerText = failure;
+
+            }
+          }
+        } else {
+          document.querySelector(response).innerText = '';
+        }
+
+      });
+
+      return this;
+
+    } catch (err) {
+      throw new Error(`input param is not valid: ${typeof input}`);
+    }
   }
 
   validate(fn = null) {
-    if (fn) {
-      fn(this.formStatus)
-    } else {
-      console.log(this.formStatus);
-    }
+    if (fn)
+      fn(this.formStatus);
+    else
+      return this.formStatus;
   }
 }
 
