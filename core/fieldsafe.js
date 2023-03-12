@@ -81,13 +81,15 @@ class Mask {
 }
 
 const REGEX = {
-  SPECIAL_CHARS: /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/,
-  EMAIL:         /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-  CPF:           /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
-  CNPJ:          /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/,
-  CEP:           /^\d{5}\-\d{3}$/
+  SPECIAL_CHARS:  /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/,
+  EMAIL:          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+  CPF:            /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
+  CNPJ:           /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/,
+  ZIPCODE_BR:     /^\d{5}\-\d{3}$/,
+  ZIPCODE_AR:     /^\d{4}$/,
+  ZIPCODE_US:     /^\d{5}(?:[-\s]\d{4})?$/,
+  ZIPCODE_CA:     /^[A-Z]\d[A-Z]\s\d[A-Z]\d$/,
 };
-
 
 class Sanitization {
 
@@ -318,15 +320,27 @@ class Validation {
   }
 
   /**
-   * Returns true if CEP format is valid
+   * Returns true if Zip Code formats are valid
    *
    * @param {string}
    * @return {boolean}
    *
    */
 
-  cep(cep) {
-    return REGEX.CEP.test(cep);
+  zipcode_br(code) {
+    return REGEX.ZIPCODE_BR.test(code); 
+  }
+
+  zipcode_ar(code) {
+    return REGEX.ZIPCODE_AR.test(code); 
+  }
+
+  zipcode_us(code) {
+    return REGEX.ZIPCODE_US.test(code); 
+  }
+
+  zipcode_ca(code) {
+    return REGEX.ZIPCODE_CA.test(code); 
   }
 
 }
