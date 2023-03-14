@@ -171,7 +171,7 @@ class Validation {
    */
 
   email(email) {
-    return email.match(REGEX.EMAIL) !== null ? true : false;
+    return REGEX.EMAIL.test(email);
   }
 
   /**
