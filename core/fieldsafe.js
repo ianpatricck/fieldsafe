@@ -91,7 +91,8 @@ const REGEX = {
   ZIPCODE_US:     /^\d{5}(?:[-\s]\d{4})?$/,
   ZIPCODE_CA:     /^[A-Z]\d[A-Z]\s\d[A-Z]\d$/,
 
-  PHONE_BR:       /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)(?:((?:9\s?\d|[2-9])\d{3})\-?(\d{4}))$/
+  PHONE_BR:       /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)(?:((?:9\s?\d|[2-9])\d{3})\-?(\d{4}))$/,
+  PHONE_US:       /^(\([1-9][0-9][0-9]\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$/
 };
 
 class Sanitization {
@@ -350,6 +351,10 @@ class Validation {
 
   phone_br(number) {
     return REGEX.PHONE_BR.test(number);   
+  }
+
+  phone_us(number) {
+    return REGEX.PHONE_US.test(number);   
   }
 
 }
