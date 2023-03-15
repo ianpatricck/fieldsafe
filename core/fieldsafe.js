@@ -85,10 +85,13 @@ const REGEX = {
   EMAIL:          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
   CPF:            /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
   CNPJ:           /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/,
+
   ZIPCODE_BR:     /^\d{5}\-\d{3}$/,
   ZIPCODE_AR:     /^\d{4}$/,
   ZIPCODE_US:     /^\d{5}(?:[-\s]\d{4})?$/,
   ZIPCODE_CA:     /^[A-Z]\d[A-Z]\s\d[A-Z]\d$/,
+
+  PHONE_BR:       /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)(?:((?:9\s?\d|[2-9])\d{3})\-?(\d{4}))$/
 };
 
 class Sanitization {
@@ -320,10 +323,7 @@ class Validation {
   }
 
   /**
-   * Returns true if Zip Code formats are valid
-   *
-   * @param {string}
-   * @return {boolean}
+   * Returns true if zip code formats are valid
    *
    */
 
@@ -341,6 +341,15 @@ class Validation {
 
   zipcode_ca(code) {
     return REGEX.ZIPCODE_CA.test(code); 
+  }
+
+  /**
+   * Returns true if phone number formats are valid
+   *
+   */
+
+  phone_br(number) {
+    return REGEX.PHONE_BR.test(number);   
   }
 
 }
