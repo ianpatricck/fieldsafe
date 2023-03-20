@@ -6,8 +6,68 @@
 
 class Mask {
 
-  constructor() {
+  constructor(formElement = null) {
+
     this.formStatus = [];
+
+    if (formElement) {
+
+      if (typeof formElement !== 'object')
+        throw new Error('form element on constructor is not a object')
+
+      this.#parseMasksToForm(formElement);
+    }
+
+  }
+
+  #parseMasksToForm(form) {
+    for (let input of form) {
+      if (input.getAttribute('fs-mask'))
+        this.#adjustMaskToInput(
+          input,
+          input.getAttribute('fs-mask')
+        ); 
+    }
+  }
+
+  #adjustMaskToInput(input, mask) {
+
+    input.maxLength = mask.length;
+    input.addEventListener('keyup', (e) => {
+
+      if (input.value.trim() !== "") {
+
+        let maskSplit    = mask.split('');
+        let inputSplit   = input.value.split('');
+
+
+        inputSplit = inputSplit.filter(element => {
+          if (!maskSplit.includes(element) && element.trim() !== "") {
+            return element;
+          }
+        });
+
+        let textMasked = [];
+
+        maskSplit.forEach(elemMask => {
+
+          if (elemMask !== "#") {
+            textMasked.push(elemMask);
+          } else {
+
+            const findFirst = inputSplit.find(element => element)
+
+            inputSplit.shift();
+            textMasked.push(findFirst);
+          }
+
+        });
+
+        input.value = textMasked.join('');
+      }
+
+    });  
+
   }
 
   fmatch(input, match, options) { 
