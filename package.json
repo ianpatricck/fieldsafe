@@ -2,7 +2,7 @@
   "name": "fieldsafe",
   "version": "1.0.0",
   "description": "Security and persistence of your app data",
-  "main": "core/fieldsafe.min.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ianpatricck/fieldsafe.git"
