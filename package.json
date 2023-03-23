@@ -1,0 +1,27 @@
+{
+  "name": "fieldsafe",
+  "version": "1.0.0",
+  "description": "Security and persistence of your app data",
+  "main": "core/fieldsafe.min.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ianpatricck/fieldsafe.git"
+  },
+  "keywords": [
+    "javascript",
+    "security",
+    "mask",
+    "regex",
+    "library",
+    "form-validation",
+    "sanitization",
+    "fields",
+    "field-validator"
+  ],
+  "author": "Ian Patrick",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ianpatricck/fieldsafe/issues"
+  },
+  "homepage": "https://github.com/ianpatricck/fieldsafe#readme"
+}
