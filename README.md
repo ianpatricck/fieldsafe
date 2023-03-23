@@ -3,6 +3,10 @@
 
 Library to assist in the development of security for form fields, with validation by RegEx, Sanitization and Mask in inputs.
 
+```html
+<script src="https://unpkg.com/fieldsafe@1.0.0/core/fieldsafe.min.js"></script>
+```
+
 <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjM4NmJhNjgyN2UwODZmNGYxMzg5MjMzNmVmZDZhMjJmMGFiZmExOCZjdD1n/BCynwkFZDX85SsXSuR/giphy.gif">
 
 __Initialization__
