@@ -35,11 +35,10 @@ class Mask {
     input.maxLength = mask.length;
     input.addEventListener('keyup', (e) => {
 
-      if (input.value.trim() !== "") {
+      if (input.value.trim() !== "" && e.code !== "Backspace") {
 
         let maskSplit    = mask.split('');
         let inputSplit   = input.value.split('');
-
 
         inputSplit = inputSplit.filter(element => {
           if (!maskSplit.includes(element) && element.trim() !== "") {
