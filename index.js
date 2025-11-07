@@ -1,1 +1,1 @@
-module.exports = require('./core/lib');
+export * from "./core/index.js";
