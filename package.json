@@ -1,6 +1,6 @@
 {
   "name": "fieldsafe",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Security and persistence of your app data",
   "main": "index.js",
   "type": "module",
