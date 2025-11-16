@@ -23,7 +23,7 @@ or:
 
 __CDN__
 ```html
-<script src="https://unpkg.com/fieldsafe@1.0.3/index.js"></script>
+<script src="https://unpkg.com/fieldsafe@1.0.8/dist/fieldsafe.umd.js"></script>
 ```
 ```html
 <script type="module">
