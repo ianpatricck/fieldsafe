@@ -1,6 +1,6 @@
 {
   "name": "fieldsafe",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Security and reliability of the data in your form",
   "main": "index.js",
   "type": "module",
