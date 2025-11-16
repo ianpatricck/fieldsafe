@@ -1,7 +1,7 @@
 {
   "name": "fieldsafe",
   "version": "1.0.3",
-  "description": "Security and persistence of your app data",
+  "description": "Security and reliability of the data in your form",
   "main": "index.js",
   "type": "module",
   "repository": {
@@ -15,7 +15,6 @@
     "regex",
     "library",
     "form-validation",
-    "sanitization",
     "fields",
     "field-validator"
   ],
