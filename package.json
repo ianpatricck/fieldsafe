@@ -12,7 +12,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "fieldsafe.d.ts"
   ],
   "types": "fieldsafe.d.ts",
   "repository": {
