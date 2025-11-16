@@ -8,23 +8,30 @@
 
 ## Install
 
-### NPM
+__NPM__
 ```bash
 $ npm install fieldsafe
 ```
-
-### CDN
-```html
-<script src="https://unpkg.com/fieldsafe@1.0.3/index.js"></script>
-```
-
-## Usage
-
 ```js
 import { email } from "fieldsafe";
 
 const isEmail = email("marco@fieldsafe.com");
 console.log(isEmail); // true
+```
+
+or:
+
+__CDN__
+```html
+<script src="https://unpkg.com/fieldsafe@1.0.3/index.js"></script>
+```
+```html
+<script type="module">
+const { email } = FieldSafe;
+
+const isEmail = email("marco@fieldsafe.com");
+console.log(isEmail); // true
+</script>
 ```
 
 When attempting to validate data using the API's internal methods, it's important to keep in mind that not all functions are located within the validation classes, such as ```email```. The function for validating the email format is not located in any validation class, only in a utilities file.
@@ -120,7 +127,7 @@ validator
   .mustContainSpecialChars(1, "Password must contain at least 1 special character")
   .mustContainUppercase(1, "Password must contain at least 1 uppercase");
 
-console.log(validator.check()); // true 
+console.log(validator.check()); // true
 ```
 
 Available methods:
@@ -153,7 +160,7 @@ Available methods:
 
 You can customize the fields with masks and make the user experience more intuitive.
 
-```fs-mask``` property allow adjust the right value format inside input. Each "#" represents a number. 
+```fs-mask``` property allow adjust the right value format inside input. Each "#" represents a number.
 ```html
 <input type="text" name="cpf" placeholder="cpf" id="cpf" fs-mask="###.###.###-##" />
 ```
