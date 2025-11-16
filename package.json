@@ -1,6 +1,6 @@
 {
   "name": "fieldsafe",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Security and reliability of the data in your form",
   "type": "module",
   "main": "dist/fieldsafe.umd.js",
